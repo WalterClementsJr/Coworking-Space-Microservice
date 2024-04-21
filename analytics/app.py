@@ -1,11 +1,8 @@
-import logging
 import os
 
 from apscheduler.schedulers.background import BackgroundScheduler
-from datetime import datetime, timedelta
 from flask import jsonify
-from sqlalchemy import and_, text
-from random import randint
+from sqlalchemy import text
 
 from config import app, db
 
@@ -21,7 +18,7 @@ def health_check():
 @app.route("/readiness_check")
 def readiness_check():
     try:
-        count = db.session.execute(text("SELECT COUNT(*) FROM tokens")).scalar()
+        db.session.execute(text("SELECT COUNT(*) FROM tokens")).scalar()
     except Exception as e:
         app.logger.error(e)
         return "failed", 500
@@ -32,11 +29,12 @@ def readiness_check():
 def get_daily_visits():
     with app.app_context():
         result = db.session.execute(text("""
-        SELECT Date(created_at) AS date,
-            Count(*)         AS visits
-        FROM   tokens
-        WHERE  used_at IS NOT NULL
-        GROUP  BY Date(created_at)
+            SELECT
+                Date(created_at) AS date,
+                Count(*)         AS visits
+            FROM tokens
+            WHERE used_at IS NOT NULL
+            GROUP BY Date(created_at)
         """))
 
         response = {}
@@ -56,15 +54,19 @@ def daily_visits():
 @app.route("/api/reports/user_visits", methods=["GET"])
 def all_user_visits():
     result = db.session.execute(text("""
-    SELECT t.user_id,
+    SELECT
+        t.user_id,
         t.visits,
         users.joined_at
-    FROM   (SELECT tokens.user_id,
-                Count(*) AS visits
-            FROM   tokens
-            GROUP  BY user_id) AS t
-        LEFT JOIN users
-                ON t.user_id = users.id;
+    FROM (
+        SELECT
+            tokens.user_id,
+            Count(*) AS visits
+        FROM   tokens
+        GROUP  BY user_id
+    ) AS t
+    LEFT JOIN users
+        ON t.user_id = users.id;
     """))
 
     response = {}
@@ -73,7 +75,6 @@ def all_user_visits():
             "visits": row[1],
             "joined_at": str(row[2])
         }
-    
     return jsonify(response)
 
 

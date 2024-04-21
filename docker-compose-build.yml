@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  analytics:
+    build:
+      context: ./analytics
+    image: public.ecr.aws/g4l4r0t9/coworking-analytics:latest
+    ports:
+      - "5153:5153"
+    restart: unless-stopped
