@@ -4,7 +4,7 @@ services:
   analytics:
     build:
       context: ./analytics
-    image: public.ecr.aws/g4l4r0t9/coworking-analytics:latest
+    image: 077294513465.dkr.ecr.us-east-1.amazonaws.com/coworking-analytics:latest
     ports:
       - "5153:5153"
     restart: unless-stopped
