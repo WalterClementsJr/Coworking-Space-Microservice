@@ -4,7 +4,7 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-db_username = os.environ.get("POSTGRES_USER", "admin")
+db_username = os.environ.get("POSTGRES_USER", "udacity")
 db_password = os.environ.get("POSTGRES_PASSWORD", "123456")
 db_host = os.environ.get("POSTGRES_HOST", "127.0.0.1")
 db_port = os.environ.get("POSTGRES_PORT", "5432")

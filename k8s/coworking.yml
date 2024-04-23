@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
         - name: coworking
-          image: public.ecr.aws/g4l4r0t9/udacity/analytics
+          image: 077294513465.dkr.ecr.us-east-1.amazonaws.com/coworking-analytics:latest
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
@@ -49,6 +49,11 @@ spec:
             - configMapRef:
                 name: env-config
           env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: env-secret
+                  key: POSTGRES_USER
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
