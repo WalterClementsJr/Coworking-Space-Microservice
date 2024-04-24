@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: env-config
 data:
-  POSTGRES_HOST: "localhost"
+  POSTGRES_HOST: "a53905f6f517d4544aff42d70adb51ab-1411344514.us-east-1.elb.amazonaws.com"
   POSTGRES_PORT: "5432"
   POSTGRES_DB: "coworking"
 #  POSTGRES_USER: "udacity"
@@ -15,5 +15,5 @@ metadata:
   name: env-secret
 type: Opaque
 data:
-  POSTGRES_USER: dWRhY2l0eQ==
-  POSTGRES_PASSWORD: YWRtaW5AMTIz
+  POSTGRES_USER: cG9zdGdyZXM=
+  POSTGRES_PASSWORD: YWRtaW4xMjM=

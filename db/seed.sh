@@ -1,7 +1,7 @@
 #!/bin/sh
-host="127.0.0.1"
-user="udacity"
-PGPASSWORD="admin@1234"
+host="a53905f6f517d4544aff42d70adb51ab-1411344514.us-east-1.elb.amazonaws.com"
+user="postgres"
+PGPASSWORD="admin123"
 db="coworking"
 
 for f in *.sql;
