@@ -7,8 +7,8 @@
 1. Install `aws-cli`, `eksctl`, and `kubectl`.
 2. Create an `AWS Codebuild` project
 
-    - Source: Select GitHub and choose the repository.
-    - Enable auto-build when there are pushes on the GitHub repository or manually start the build.
+    - Source: Select GitHub and choose the repository (do not choose public repo).
+    - Enable webhook push event to build when there are pushes on the GitHub repository or start the build manually.
     - Config only run on branch master by setting srouce version as `refs/heads/master`
 
 3. a private `ECR` registry
